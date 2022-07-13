@@ -8,6 +8,7 @@ import Shop from './pages/product'
 import Profile from './pages/profile'
 import Wishlist from './pages/profile/wishlist'
 import ProductDetail from './pages/product/[slug]'
+import 'antd/dist/antd.css'
 
 function App() {
 

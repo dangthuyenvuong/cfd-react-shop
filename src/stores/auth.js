@@ -2,6 +2,7 @@ import { data } from "jquery"
 import authService from "../services/auth"
 import userService from "../services/user"
 import { setToken, setUser } from "../utils/token"
+import { getUserInfo } from "./user"
 
 export const fetchLogin = (payload) => {
     return async (dispatch) => {
@@ -10,11 +11,7 @@ export const fetchLogin = (payload) => {
             if(token.data) {
                 setToken(token.data)
 
-                const user = await userService.getInfo()
-
-                setUser(user.data)
-
-                dispatch({type: 'user/setUser', payload: user.data})
+                dispatch(getUserInfo())
 
                 payload?.success(user.data)
             } else if(token.message) {

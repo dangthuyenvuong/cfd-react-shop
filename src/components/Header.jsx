@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { ACCOUNT_PATH } from '../constants/path'
 
 export default function Header() {
     return (
@@ -540,9 +542,9 @@ export default function Header() {
                                 </a>
                             </li>
                             <li className="nav-item ml-lg-n4">
-                                <a className="nav-link" href="./account-orders.html">
+                                <Link className="nav-link" to={ACCOUNT_PATH}>
                                     <i className="fe fe-user" />
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item ml-lg-n4">
                                 <a className="nav-link" href="./account-wishlist.html">

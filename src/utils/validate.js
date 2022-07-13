@@ -61,6 +61,10 @@ export default function validate(form, rules) {
             if(r.confirm) {
                 err = form[i] === form[r.confirm] ? undefined : ERROR_MESSAGE.confirm || r.message
             }
+
+            if(typeof r === 'function') {
+                err = r(form[i], r)
+            }
         }
 
         if (err) {
