@@ -6,6 +6,7 @@ import { fetchLogin, fetchRegister } from '../stores/auth'
 import styled from 'styled-components'
 import { ACCOUNT_PATH } from '../constants/path'
 import { Navigate } from 'react-router-dom'
+import Button from '../components/Button'
 const ErrorMessage = styled.div`
     color: red;
 `
@@ -13,6 +14,9 @@ const ErrorMessage = styled.div`
 export default function Auth() {
     const [formLogin] = useState({})
     const { user } = useSelector(store => store.user)
+    // const { loadingLogin } = useSelector(store => store.auth)
+
+    const [loadingLogin, setLoadingLogin] = useState(false)
     const [errorLogin, setErrorLogin] = useState({})
     const [errorLoginMessage, setErrorLoginMessage] = useState('')
 
@@ -40,12 +44,16 @@ export default function Auth() {
         setErrorLogin(error)
         if (Object.keys(error).length === 0) {
             setErrorLoginMessage('')
+            setLoadingLogin(true)
             dispatch(fetchLogin({
                 data: formLogin,
                 error: (error) => {
                     setErrorLoginMessage(error.message)
                 },
-                success: () => { }
+                success: () => { },
+                finally: () => {
+                    setLoadingLogin(false)
+                }
             }))
         }
     }
@@ -71,10 +79,10 @@ export default function Auth() {
                     message: 'Vui lòng điền giống password'
                 }
             ]
-        }) 
+        })
         setErrorRegister(error)
 
-        if(Object.keys(error).length === 0) {
+        if (Object.keys(error).length === 0) {
             dispatch(fetchRegister({
                 data: formRegister,
                 success: () => {
@@ -150,9 +158,9 @@ export default function Auth() {
                                         </div>
                                         <div className="col-12">
                                             {/* Button */}
-                                            <button className="btn btn-sm btn-dark" type="submit">
+                                            <Button loading={loadingLogin} type="submit">
                                                 Sign In
-                                            </button>
+                                            </Button>
                                         </div>
                                     </div>
                                 </form>
@@ -227,9 +235,9 @@ export default function Auth() {
                                         </div>
                                         <div className="col-12">
                                             {/* Button */}
-                                            <button className="btn btn-sm btn-dark" type="submit">
+                                            <Button type="submit">
                                                 Register
-                                            </button>
+                                            </Button>
                                         </div>
                                     </div>
                                 </form>
