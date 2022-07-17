@@ -3,6 +3,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from 'redux-thunk'
 import { DEBUG } from "../constants/config";
 import { authReducer } from "./auth";
+import { productReducer } from "./product";
 import { userReducer } from "./user";
 
 
@@ -34,7 +35,8 @@ import { userReducer } from "./user";
 const store = configureStore({
     reducer: {
         auth: authReducer,
-        user: userReducer
+        user: userReducer,
+        product: productReducer
     },
     devTools: DEBUG
 })

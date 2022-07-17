@@ -1,134 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import WishlistCard from '../../components/WishlistCard'
+import Paginate from '../../components/Paginate'
+import profileService from '../../services/profile'
+import { useData } from '../../hooks/useData'
+import { usePage } from '../../hooks/usePage'
+import { Skeleton } from '@mui/material'
+
+// 1. Gọi api wishlist khi click vào product 
+// 2. Lấy list prod ở trang wishlist
+// 3. Xóa product khỏi wishlist
+// 4. Paginate
+// 5. useData
+// 6. Làm trạng thái Loading
 
 export default function Wishlist() {
+    // const [product, setProduct] = useState()
+    // const [paginate, setPaginate] = useState()
+
+
+    // useEffect(() => {
+    //     profileService.getWishlist()
+    //     .then(res => {
+    //         setProduct(res.data)
+    //         setPaginate(res.paginate)
+    //     })
+    // }, [])
+
+    let currentPage = usePage()
+
+    const { data: products, loading, paginate, fetchData } = useData(() => profileService.getWishlist(`?page=${currentPage}`), [currentPage])
+
     return (
         <>
+
             <div className="row">
-                {/* Item */}
-                <div className="col-6 col-md-4">
-                    <div className="card mb-7">
-                        {/* Image */}
-                        <div className="card-img">
-                            {/* Action */}
-                            <button className="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                                <i className="fe fe-x" />
-                            </button>
-                            {/* Button */}
-                            <button className="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                                <i className="fe fe-eye mr-2 mb-1" /> Quick View
-                            </button>
-                            {/* Image */}
-                            <img className="card-img-top" src="/img/products/product-6.jpg" alt="..." />
-                        </div>
-                        {/* Body */}
-                        <div className="card-body font-weight-bold text-center">
-                            <a className="text-body" href="product.html">Cotton floral print Dress</a> <br />
-                            <span className="text-muted">$40.00</span>
-                        </div>
-                    </div>
-                </div>
-                {/* Item */}
-                <div className="col-6 col-md-4">
-                    <div className="card mb-7">
-                        {/* Image */}
-                        <div className="card-img">
-                            {/* Action */}
-                            <button className="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                                <i className="fe fe-x" />
-                            </button>
-                            {/* Badge */}
-                            <span className="badge badge-dark card-badge card-badge-left text-uppercase">
-                                Sale
-                            </span>
-                            {/* Button */}
-                            <button className="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                                <i className="fe fe-eye mr-2 mb-1" /> Quick View
-                            </button>
-                            {/* Image */}
-                            <img className="card-img-top" src="/img/products/product-10.jpg" alt="..." />
-                        </div>
-                        {/* Body */}
-                        <div className="card-body font-weight-bold text-center">
-                            <a className="text-body" href="product.html">Suede cross body Bag</a> <br />
-                            <span>
-                                <span className="font-size-xs text-gray-350 text-decoration-line-through">$85.00</span>
-                                <span className="text-primary">$49.00</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                {/* Item */}
-                <div className="col-6 col-md-4">
-                    <div className="card mb-7">
-                        {/* Image */}
-                        <div className="card-img">
-                            {/* Action */}
-                            <button className="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                                <i className="fe fe-x" />
-                            </button>
-                            {/* Button */}
-                            <button className="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                                <i className="fe fe-eye mr-2 mb-1" /> Quick View
-                            </button>
-                            {/* Image */}
-                            <img className="card-img-top" src="/img/products/product-32.jpg" alt="..." />
-                        </div>
-                        {/* Body */}
-                        <div className="card-body font-weight-bold text-center">
-                            <a className="text-reset" href="product.html">Cotton leaf print Shirt</a>
-                            <span className="text-muted">$65.00</span>
-                        </div>
-                    </div>
-                </div>
-                {/* Item */}
-                <div className="col-6 col-md-4">
-                    <div className="card mb-7">
-                        {/* Image */}
-                        <div className="card-img">
-                            {/* Action */}
-                            <button className="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                                <i className="fe fe-x" />
-                            </button>
-                            {/* Button */}
-                            <button className="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                                <i className="fe fe-eye mr-2 mb-1" /> Quick View
-                            </button>
-                            {/* Image */}
-                            <img className="card-img-top" src="/img/products/product-7.jpg" alt="..." />
-                        </div>
-                        {/* Body */}
-                        <div className="card-body font-weight-bold text-center">
-                            <a className="text-body" href="product.html">Leather Sneakers</a> <br />
-                            <a className="text-primary" href="#">Select Options</a>
-                        </div>
-                    </div>
-                </div>
-                {/* Item */}
-                <div className="col-6 col-md-4">
-                    <div className="card mb-7">
-                        {/* Image */}
-                        <div className="card-img">
-                            {/* Action */}
-                            <button className="btn btn-xs btn-circle btn-white-primary card-action card-action-right">
-                                <i className="fe fe-x" />
-                            </button>
-                            {/* Button */}
-                            <button className="btn btn-xs btn-block btn-dark card-btn" data-toggle="modal" data-target="#modalProduct">
-                                <i className="fe fe-eye mr-2 mb-1" /> Quick View
-                            </button>
-                            {/* Image */}
-                            <img className="card-img-top" src="/img/products/product-11.jpg" alt="..." />
-                        </div>
-                        {/* Body */}
-                        <div className="card-body font-weight-bold text-center">
-                            <a className="text-body" href="product.html">Another fine dress</a> <br />
-                            <span className="text-muted">$99.00</span>
-                        </div>
-                    </div>
-                </div>
+                {
+                    loading ? [...Array(9)].map((_, i) => <div className='col-md-4' key={i} style={{ marginBottom: 20 }}><Skeleton style={{ transform: 'none' }} width="100%" height={250} /></div>) :
+                        products.map(e => <WishlistCard onRemove={fetchData} key={e._id} product={e.product} />)
+                }
             </div>
             {/* Pagination */}
-            <nav className="d-flex justify-content-center justify-content-md-end">
+            {
+                paginate && <Paginate totalPage={paginate.totalPage} />
+            }
+            {/* <nav className="d-flex justify-content-center justify-content-md-end">
                 <ul className="pagination pagination-sm text-gray-400">
                     <li className="page-item">
                         <a className="page-link page-link-arrow" href="#">
@@ -159,7 +74,7 @@ export default function Wishlist() {
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
         </>
     )
 }

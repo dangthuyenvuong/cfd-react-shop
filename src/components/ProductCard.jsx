@@ -1,11 +1,19 @@
 import { currency } from '../utils/currency'
 import { Link, generatePath } from 'react-router-dom'
 import { PRODUCT_DETAIL_PATH } from '../constants/path'
+import profileService from '../services/profile'
+import {message} from 'antd'
 import { useMemo } from 'react'
 export default function ProductCard({ product }) {
 
-    const { name, real_price, price, images, slug } = product
+    const { name, real_price, price, images, slug, _id } = product
     const path = useMemo(() => generatePath(PRODUCT_DETAIL_PATH, { slug }), [slug])
+
+    const addWishlist = async () => {
+        await profileService.addWishlist(_id)
+        message.success('Đã thêm sản phẩm vào danh sách yêu thích thành công!')
+    }
+
     return (
         <div className="col-6 col-md-4">
             {/* Card */}
@@ -33,7 +41,7 @@ export default function ProductCard({ product }) {
                             </button>
                         </span>
                         <span className="card-action">
-                            <button className="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                            <button className="btn btn-xs btn-circle btn-white-primary" onClick={addWishlist}>
                                 <i className="fe fe-heart" />
                             </button>
                         </span>

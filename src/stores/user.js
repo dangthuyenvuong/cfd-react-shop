@@ -69,6 +69,7 @@ export const { name, reducer: userReducer, actions: userAction } = createSlice({
             clearUser()
             state.user = null
         })
+
     }
 })
 

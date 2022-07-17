@@ -39,6 +39,8 @@ export default function Paginate({ totalPage, onChange, name = 'page' }) {
         if (end > totalPage) {
             end = totalPage
             start = end - 4
+
+            if(start < 0) start = 1
         }
 
 

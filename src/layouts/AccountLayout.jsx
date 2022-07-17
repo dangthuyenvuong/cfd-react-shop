@@ -1,7 +1,8 @@
 import { Outlet, Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { AUTH_PATH, HOME_PATH } from '../constants/path'
+import { ACCOUNT_PATH, ACCOUNT_WISHLIST_PATH, AUTH_PATH, HOME_PATH } from '../constants/path'
 import { logoutAction } from '../stores/user'
+import { Link } from 'react-router-dom'
 
 export default function AccountLayout() {
     const { user } = useSelector(store => store.user)
@@ -13,7 +14,7 @@ export default function AccountLayout() {
 
     }
 
-    if(!user) return <Navigate to={AUTH_PATH}/>
+    if (!user) return <Navigate to={AUTH_PATH} />
 
     return (
         <section className="pt-7 pb-12">
@@ -32,12 +33,12 @@ export default function AccountLayout() {
                                 <a className="list-group-item list-group-item-action dropright-toggle " href="account-orders.html">
                                     Orders
                                 </a>
-                                <a className="list-group-item list-group-item-action dropright-toggle " href="account-wishlist.html">
-                                    Widhlist
-                                </a>
-                                <a className="list-group-item list-group-item-action dropright-toggle active" href="account-personal-info.html">
+                                <Link className="list-group-item list-group-item-action dropright-toggle " to={ACCOUNT_WISHLIST_PATH}>
+                                    Wishlist
+                                </Link>
+                                <Link className="list-group-item list-group-item-action dropright-toggle active" to={ACCOUNT_PATH}>
                                     Personal Info
-                                </a>
+                                </Link>
                                 <a className="list-group-item list-group-item-action dropright-toggle " href="account-address.html">
                                     Addresses
                                 </a>
