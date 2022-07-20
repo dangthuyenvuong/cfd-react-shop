@@ -3,7 +3,8 @@ import productSerivce from "../services/product";
 
 const initialState = {
     categories: [],
-    loadingCategory: true
+    loadingCategory: true,
+    isFetchCategories: false
 }
 
 
@@ -19,6 +20,7 @@ export const { name, actions: productAction, reducer: productReducer } = createS
     extraReducers: builder => {
         builder.addCase(fetchCategories.pending, (state) => {
             state.loadingCategory = true
+            state.isFetchCategories = true
         })
 
         builder.addCase(fetchCategories.fulfilled, (state) => {

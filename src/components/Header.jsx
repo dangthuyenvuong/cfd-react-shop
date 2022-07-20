@@ -1,8 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ACCOUNT_PATH } from '../constants/path'
+import { ACCOUNT_PATH, HOME_PATH, PRODUCT_PATH } from '../constants/path'
+import { useGlobalState } from '../hooks/useGlobalState'
 
 export default function Header() {
+    const {setIsOpenSearchModal} = useGlobalState()
+    const _openSearchModal = (ev) => {
+        ev.preventDefault()
+        setIsOpenSearchModal(true)
+    }
     return (
         <>
             <div className="navbar navbar-topbar navbar-expand-xl navbar-light bg-light">
@@ -111,7 +117,7 @@ export default function Header() {
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item dropdown">
                                 {/* Toggle */}
-                                <a className="nav-link" data-toggle="dropdown" href="#">Home</a>
+                                <Link className="nav-link" data-toggle="dropdown" to={HOME_PATH}>Home</Link>
                                 {/* Menu */}
                                 <div className="dropdown-menu">
                                     <div className="card card-lg">
@@ -148,7 +154,7 @@ export default function Header() {
                             </li>
                             <li className="nav-item dropdown position-static">
                                 {/* Toggle */}
-                                <a className="nav-link" data-toggle="dropdown" href="#">Catalog</a>
+                                <Link className="nav-link" data-toggle="dropdown" to={PRODUCT_PATH}>Product</Link>
                                 {/* Menu */}
                                 <div className="dropdown-menu w-100">
                                     {/* Tabs */}
@@ -537,7 +543,7 @@ export default function Header() {
                         {/* Nav */}
                         <ul className="navbar-nav flex-row">
                             <li className="nav-item">
-                                <a className="nav-link" data-toggle="modal" href="#modalSearch">
+                                <a className="nav-link" data-toggle="modal" onClick={_openSearchModal}>
                                     <i className="fe fe-search" />
                                 </a>
                             </li>

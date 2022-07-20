@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { generatePath, Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { PRODUCT_CATEGORY_PATH, PRODUCT_PATH } from '../constants/path'
+import { useCategories } from '../hooks/useCategories'
 import { useData } from "../hooks/useData"
 import productSerivce from "../services/product"
 import { fetchCategories } from '../stores/product'
@@ -28,18 +29,20 @@ export default function Category() {
     // const [categories, setCategories] = useState()
     // const [loading, setLoading] = useState(true)
 
-    const { categories, loadingCategory } = useSelector(store => store.product)
-    const dispatch = useDispatch()
+    // const { categories, loadingCategory } = useSelector(store => store.product)
+    // const dispatch = useDispatch()
 
-    useEffect(() => {
-        // setLoading(true)
-        // productSerivce.getCategories()
-        //     .then(res => {
-        //         setCategories(res)
-        //         setLoading(false)
-        //     })
-        dispatch(fetchCategories())
-    }, [])
+    // useEffect(() => {
+    //     // setLoading(true)
+    //     // productSerivce.getCategories()
+    //     //     .then(res => {
+    //     //         setCategories(res)
+    //     //         setLoading(false)
+    //     //     })
+    //     dispatch(fetchCategories())
+    // }, [])
+
+    const { categories, loadingCategory } = useCategories()
 
 
     return (

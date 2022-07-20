@@ -8,6 +8,12 @@ import { Skeleton } from '@mui/material'
 import { useData } from '../../hooks/useData'
 import Category from '../../components/Category'
 import { useParams } from 'react-router-dom'
+import { useSearchValue } from '../../hooks/useSearchValue'
+import styled from 'styled-components'
+
+const SearchTextWrap = styled.p`
+    font-size: 25px;
+`
 
 export default function Shop() {
 
@@ -28,10 +34,16 @@ export default function Shop() {
 
 
     let currentPage = usePage()
+    const searchParam = useSearchValue()
+    const q = searchParam.get('q')
 
     const { data: products, paginate, loading } = useData(() => {
-        return productSerivce.getProduct(`?page=${currentPage}${category ? `&categories=${category}` : ''}`)
-    }, [currentPage, category])
+
+        return productSerivce.getProduct(`?page=${currentPage}${category ? `&categories=${category}` : ''}${q ? `&name=${q}` : ''}`)
+    }, [currentPage, category, q])
+
+
+
 
     return (
         <section className="py-11">
@@ -469,6 +481,11 @@ export default function Shop() {
                             </div>
                         </div>
                         {/* Products */}
+                        {
+                            q && <SearchTextWrap>
+                                Kết quả tìm kiếm cho `{q}`
+                            </SearchTextWrap>
+                        }
                         <div className="row">
                             {
                                 loading ? [...Array(9)].map((_, i) => <div className='col-md-4' key={i} style={{ marginBottom: 20 }}>
