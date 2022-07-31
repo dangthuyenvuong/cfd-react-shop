@@ -3,7 +3,8 @@ import authService from "../services/auth"
 import userService from "../services/user"
 import { setToken, setUser } from "../utils/token"
 import { getUserInfo } from "./user"
-import { createSlice, createAsyncThunk, isAnyOf } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, isAnyOf, createAction } from '@reduxjs/toolkit'
+import { call, put } from "redux-saga/effects"
 
 // export const fetchLogin = (payload) => {
 //     return async (dispatch) => {
@@ -71,7 +72,7 @@ export const { name, reducer: authReducer } = createSlice({
 
 
 
-export const fetchLogin = createAsyncThunk(`${name}/fetchLogin`, async (payload, thunkApi) => {
+export const fetchLoginThunk = createAsyncThunk(`${name}/fetchLogin`, async (payload, thunkApi) => {
 
     try {
         const token = await authService.login(payload.data)
@@ -85,8 +86,34 @@ export const fetchLogin = createAsyncThunk(`${name}/fetchLogin`, async (payload,
         }
     } catch (error) {
 
+    } finally {
+        payload?.finally()
     }
 })
+
+
+export const fetchLoginType = createAction(`${name}/fetchLogin`)
+
+export function* fetchLogin({ payload }) {
+    try {
+        const token = yield call(authService.login, payload.data)
+        if (token.data) {
+            setToken(token.data)
+            // thunkApi.dispatch(getUserInfo())
+            yield put(getUserInfo())
+
+            // payload?.success()
+        } else if (token.message) {
+            // payload?.error(token)
+        }
+    } catch (err) {
+        payload?.error(err)
+        console.error(err)
+    } finally {
+        payload?.finally()
+    }
+
+}
 
 
 export const fetchRegister = createAsyncThunk(`${name}/fetchRegister`, async (payload, thunkApi) => {

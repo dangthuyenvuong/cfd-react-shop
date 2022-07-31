@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
-import ProductCard from '../../components/ProductCard'
-import productSerivce from '../../services/product'
-import Paginate from '../../components/Paginate'
-import { usePage } from '../../hooks/usePage'
 import { Skeleton } from '@mui/material'
-import { useData } from '../../hooks/useData'
-import Category from '../../components/Category'
 import { useParams } from 'react-router-dom'
-import { useSearchValue } from '../../hooks/useSearchValue'
 import styled from 'styled-components'
+import Category from '../../components/Category'
+import Paginate from '../../components/Paginate'
+import ProductCard from '../../components/ProductCard'
+import Slider from '../../components/Slider'
+import { useData } from '../../hooks/useData'
+import { usePage } from '../../hooks/usePage'
+import { useSearchValue } from '../../hooks/useSearchValue'
+import productSerivce from '../../services/product'
 
 const SearchTextWrap = styled.p`
     font-size: 25px;
@@ -352,8 +351,8 @@ export default function Shop() {
                     </div>
                     <div className="col-12 col-md-8 col-lg-9">
                         {/* Slider */}
-                        <div className="flickity-page-dots-inner mb-9" data-flickity="{&quot;pageDots&quot;: true}">
-                            {/* Item */}
+
+                        <Slider >
                             <div className="w-100">
                                 <div className="card bg-h-100 bg-left" style={{ backgroundImage: 'url(/img/covers/cover-24.jpg)' }}>
                                     <div className="row" style={{ minHeight: '400px' }}>
@@ -373,7 +372,6 @@ export default function Shop() {
                                     </div>
                                 </div>
                             </div>
-                            {/* Item */}
                             <div className="w-100">
                                 <div className="card bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-29.jpg)' }}>
                                     <div className="row align-items-center" style={{ minHeight: '400px' }}>
@@ -395,7 +393,6 @@ export default function Shop() {
                                     </div>
                                 </div>
                             </div>
-                            {/* Item */}
                             <div className="w-100">
                                 <div className="card bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-30.jpg)' }}>
                                     <div className="row align-items-center" style={{ minHeight: '400px' }}>
@@ -412,7 +409,11 @@ export default function Shop() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Slider>
+
+                        {/* <div className="flickity-page-dots-inner mb-9" data-flickity="{&quot;pageDots&quot;: true}">
+
+                        </div> */}
                         {/* Header */}
                         <div className="row align-items-center mb-7">
                             <div className="col-12 col-md">

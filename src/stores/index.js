@@ -4,8 +4,9 @@ import thunk from 'redux-thunk'
 import { DEBUG } from "../constants/config";
 import { authReducer } from "./auth";
 import { productReducer } from "./product";
-import { userReducer } from "./user";
-
+import { getUserInfo, userReducer } from "./user";
+import createSagaMiddleware from "redux-saga";
+import { rootSaga } from "./saga";
 
 // Redux toolkit
 
@@ -32,13 +33,23 @@ import { userReducer } from "./user";
 // )
 
 
+const sagaMiddleware = createSagaMiddleware()
+
 const store = configureStore({
     reducer: {
         auth: authReducer,
         user: userReducer,
         product: productReducer
     },
-    devTools: DEBUG
+    devTools: DEBUG,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 })
 
+
+sagaMiddleware.run(rootSaga)
+
+store.dispatch(getUserInfo())
+
 export default store
+
+

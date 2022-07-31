@@ -1,5 +1,5 @@
 import userService from "../services/user"
-import { clearToken, clearUser, getUser, setUser } from "../utils/token"
+import { clearToken, clearUser, getToken, getUser, setUser } from "../utils/token"
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 
 const initialvalue = {
@@ -76,11 +76,13 @@ export const { name, reducer: userReducer, actions: userAction } = createSlice({
 
 export const getUserInfo = createAsyncThunk(`${name}/getUserInfo`, async (_, thunkApi) => {
     try {
-        const res = await userService.getInfo()
-        if (res.data) {
-            setUser(res.data)
-
-            thunkApi.dispatch(userAction.setUser(res.data))
+        if(getToken()){
+            const res = await userService.getInfo()
+            if (res.data) {
+                setUser(res.data)
+    
+                thunkApi.dispatch(userAction.setUser(res.data))
+            }
         }
     } catch (err) { }
 })

@@ -11,6 +11,7 @@ import ProductDetail from './pages/product/[slug]'
 import 'antd/dist/antd.css'
 import Payment from './pages/profile/payment'
 
+
 function App() {
 
   return (

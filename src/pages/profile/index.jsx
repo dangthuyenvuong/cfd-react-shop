@@ -27,7 +27,7 @@ import moment from 'moment'
 export default function Profile() {
     const { user } = useSelector(store => store.user)
 
-    const [form] = useState(user)
+    const [form] = useState({ ...user })
     const [error, setError] = useState({})
 
     const dispatch = useDispatch()
@@ -50,6 +50,7 @@ export default function Profile() {
                 () => form.oldPassword === form.newPassword ? 'Mật khẩu mới không được giống mật khẩu cũ' : undefined
             ]
         }
+        console.log(form);
         const error = validate(form, rule)
         setError(error)
         if (Object.keys(error).length === 0) {

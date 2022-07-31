@@ -84,7 +84,7 @@ export default function SearchModal() {
                 </button>
                 {/* Header*/}
                 <div className="modal-header line-height-fixed font-size-lg">
-                    <strong className="mx-auto">Search Products</strong>
+                    <strong className="mx-auto">Tìm kiếm sản phẩm</strong>
                 </div>
                 {/* Body: Form */}
                 <div className="modal-body">
@@ -99,7 +99,7 @@ export default function SearchModal() {
                             </select>
                         </div>
                         <div className="input-group input-group-merge">
-                            <input value={search} onChange={(ev) => setSearch(ev.target.value)} className="form-control" type="search" placeholder="Search" />
+                            <input value={search} onChange={(ev) => setSearch(ev.target.value)} className="form-control" type="search" placeholder="Tìm kiếm..." />
                             <div className="input-group-append">
                                 <button onClick={onSearch} className="btn btn-outline-border" type="submit">
                                     <i className="fe fe-search" />
@@ -111,7 +111,7 @@ export default function SearchModal() {
                 {/* Body: Results (add `.d-none` to disable it) */}
                 <div className="modal-body border-top font-size-sm">
                     {/* Heading */}
-                    <p>Search Results:</p>
+                    <p>Kết quả tìm kiếm:</p>
                     {/* Items */}
                     {
                         isLoading ? [...Array(5)].map((e, i) => <Skeleton style={{ marginBottom: 20 }} key={i} height={82} />) :
@@ -119,7 +119,7 @@ export default function SearchModal() {
                                 <div className="modal-body">
                                     {/* Text */}
                                     <p className="mb-3 font-size-sm text-center">
-                                        Nothing matches your search
+                                        Không tìm thấy sản phẩm
                                     </p>
                                     <p className="mb-0 font-size-sm text-center">
                                         😞

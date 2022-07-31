@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Input from '../components/Input'
 import validate, { minMax, pattern, required } from '../utils/validate'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchLogin, fetchRegister } from '../stores/auth'
+import { fetchLogin, fetchLoginThunk, fetchLoginType, fetchRegister } from '../stores/auth'
 import styled from 'styled-components'
 import { ACCOUNT_PATH } from '../constants/path'
 import { Navigate } from 'react-router-dom'
@@ -44,8 +44,21 @@ export default function Auth() {
         setErrorLogin(error)
         if (Object.keys(error).length === 0) {
             setErrorLoginMessage('')
-            setLoadingLogin(true)
-            dispatch(fetchLogin({
+            // setLoadingLogin(true)
+
+
+            // dispatch(fetchLoginThunk({
+            //     data: formLogin,
+            //     error: (error) => {
+            //         setErrorLoginMessage(error.message)
+            //     },
+            //     success: () => { },
+            //     finally: () => {
+            //         setLoadingLogin(false)
+            //     }
+            // }))
+
+            dispatch(fetchLoginType({
                 data: formLogin,
                 error: (error) => {
                     setErrorLoginMessage(error.message)
